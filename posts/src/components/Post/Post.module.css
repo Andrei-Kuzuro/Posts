@@ -1,0 +1,27 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+  margin: 10px auto;
+  padding: 0;
+  border: solid 2px #d7d5d5;
+  border-radius: 5px;
+  background: #d09683;
+}
+
+.title {
+  padding: 0 15px;
+}
+
+.author {
+  margin-top: auto;
+  padding: 0 15px;
+  border-top: solid 2px #d7d5d5;
+  background: #363237;
+  color: #d7d5d5;
+}
+
+.author p {
+  font-size: 16px;
+  font-weight: bold;
+}
