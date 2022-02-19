@@ -1,6 +1,6 @@
 import styles from "./Post.module.css";
 
-export interface IProps {
+export interface IPost {
   title: string;
   body: string;
   userId: string;
@@ -8,7 +8,7 @@ export interface IProps {
   onClick: () => void;
 }
 
-export const Post = ({ title, body, author, userId, onClick }: IProps) => {
+export const Post = ({ title, body, author, userId, onClick }: IPost) => {
   return (
     <div className={styles.post}>
       <div className={styles.title}>

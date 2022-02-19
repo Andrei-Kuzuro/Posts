@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
-import { IProps, Post } from "../Post/Post";
+import { Post } from "../Post/Post";
 import styles from "./PostList.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { IState } from "../redux/store";
+import { addPosts } from "../redux/actions/postActions";
+import { IPost } from "../redux/reducers/postReducers";
 
 const POST_PER_PAGE = 5;
 
 export const PostList = () => {
-  const [posts, setPosts] = useState([]);
+  const posts = useSelector((state: IState) => state.postsReducers.posts);
+
+  const dispatch = useDispatch();
 
   const [page, setPage] = useState(1);
 
@@ -20,7 +26,7 @@ export const PostList = () => {
     ]).then((result) => {
       const [posts, authors] = result;
 
-      const newPost = posts.map((post: IProps) => {
+      const newPost = posts.map((post: IPost) => {
         const authorId = post.userId;
 
         const author = authors.find(
@@ -29,7 +35,7 @@ export const PostList = () => {
         return { ...post, author: author.name };
       });
 
-      setPosts(newPost);
+      dispatch(addPosts(newPost));
     });
   }, []);
 
@@ -41,7 +47,7 @@ export const PostList = () => {
 
   return (
     <div className={styles.container}>
-      {postsSlised.map((item: IProps, index) => {
+      {postsSlised.map((item: IPost, index) => {
         return (
           <Post
             key={index}
@@ -53,6 +59,7 @@ export const PostList = () => {
           />
         );
       })}
+
       <button onClick={showMore}>Show More</button>
     </div>
   );
